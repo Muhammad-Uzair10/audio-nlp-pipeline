@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - API_KEY=your-secret-key
+      - WHISPER_MODEL=medium
+    volumes:
+      - ./cache:/app/cache
+      - ./logs:/app/logs
+    depends_on:
+      - redis
+      - db
+
+  worker:
+    build: .
+    command: celery -A tasks.background worker --loglevel=info
+    volumes:
+      - ./cache:/app/cache
+      - ./logs:/app/logs
+    depends_on:
+      - redis
+      - db
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: audio_nlp
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:
