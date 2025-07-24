@@ -45,3 +45,21 @@ pip install -r requirements.txt
 
 # Download spaCy model
 python -m spacy download en_core_web_sm
+
+### Run Development Server
+
+# Start Redis (separate terminal)
+redis-server
+
+# Start API server
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+### 🤝 Contributing
+Fork the repository
+Create your feature branch (git checkout -b feature/AmazingFeature)
+Commit your changes (git commit -m 'Add some AmazingFeature')
+Push to the branch (git push origin feature/AmazingFeature)
+Open a Pull Request
+
+### 📄 License
+MIT License
