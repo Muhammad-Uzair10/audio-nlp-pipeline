@@ -95,7 +95,7 @@ pytest tests/ -v
     }
   },
   "aggressive_phrases": ["leave me alone"],
-  "trigger_terms": ["please"],
+  "trigger_terms": [],
   "confidence": 0.92,
   "processing_time": 2.45
 }
