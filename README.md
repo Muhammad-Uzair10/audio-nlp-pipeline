@@ -45,21 +45,71 @@ pip install -r requirements.txt
 
 # Download spaCy model
 python -m spacy download en_core_web_sm
+```
 
 ### Run Development Server
-
+```bash
 # Start Redis (separate terminal)
 redis-server
 
 # Start API server
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
 
-### 🤝 Contributing
-Fork the repository
-Create your feature branch (git checkout -b feature/AmazingFeature)
-Commit your changes (git commit -m 'Add some AmazingFeature')
-Push to the branch (git push origin feature/AmazingFeature)
-Open a Pull Request
+## 🚀 API Endpoints
 
-### 📄 License
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/analyze` | POST | Analyze audio file |
+| `/health` | GET | Health check |
+| `/metrics` | GET | System metrics |
+
+### Example Usage
+```bash
+curl -X POST \
+  -H "Authorization: Bearer your-api-key" \
+  -F "file=@test.wav" \
+  http://localhost:8000/analyze
+```
+
+## 🐳 Docker Deployment
+```bash
+docker-compose up --build
+```
+
+## 🧪 Testing
+```bash
+pytest tests/ -v
+```
+
+## 📊 Sample Response
+```json
+{
+  "analysis_id": 12345,
+  "transcript": "leave me alone.",
+  "sentiment": {
+    "textblob": -0.7,
+    "transformer": {
+      "label": "NEGATIVE",
+      "score": 0.98
+    }
+  },
+  "aggressive_phrases": ["leave me alone"],
+  "trigger_terms": ["please"],
+  "confidence": 0.92,
+  "processing_time": 2.45
+}
+```
+
+## 🤝 Contributing
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
 MIT License
+
+
+
